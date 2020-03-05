@@ -70,7 +70,7 @@ class Message(object):
             self.valid_words (list, determined using helper function load_words)
         '''
         self.message_text = text
-        self.valid_words = load_words(WORDLIST_FILENAME)
+        self.valid_words = load_words(WORDLIST_FILENAME)[:] # return a COPY/Colon
 
     def get_message_text(self):
         '''
@@ -238,10 +238,10 @@ class CiphertextMessage(Message):
                 if is_word(self.valid_words, word):
                     valid_words += 1
             if valid_words >= max_valid_words:
-                best_decryptions = shifted_text
+                best_decryption = shifted_text
                 best_shift = shift
                 max_valid_words = valid_words
-        return (best_shift, best_decryptions)
+        return (best_shift, best_decryption)
 
 if __name__ == '__main__':
 
